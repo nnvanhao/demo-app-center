@@ -40,24 +40,3 @@ jobs:
       pathtoPublish: android/app/build/outputs/bundle/release/app-release.aab
       artifactName: drop
       publishLocation: 'container'
-
-
-
-- job: Build_iOS
-  pool:
-    vmImage: 'macOS-11'
-  steps:
-  - task: NodeTool@0
-    displayName: 'Install Node'
-    inputs:
-      versionSpec: '16.13.2'
-  - task: Cache@2
-    inputs:
-      key: 'yarn | "$(Agent.OS)" | yarn.lock'
-      restoreKeys: |
-        yarn | "$(Agent.OS)"
-      path: $(YARN_CACHE_FOLDER)
-    displayName: Cache Yarn packages
-  - script: yarn install --frozen-lockfile
-  - script: cd ios && pod install
-  - script: cd ios && xcodebuild clean archive -workspace testCiCdReactNative.xcworkspace -scheme testCiCdReactNative -archivePath testCiCdReactNative.xcarchive CODE_SIGNING_ALLOWED=NO | xcpretty
