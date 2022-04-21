@@ -21,6 +21,8 @@ workflows:
           cd ios
           xcodebuild clean archive -workspace DemoAppCenter.xcworkspace -scheme DemoAppCenter -archivePath DemoAppCenter.xcarchive CODE_SIGNING_ALLOWED=NO | xcpretty
     artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
 
   react-native-android:
