@@ -71,6 +71,8 @@ jobs:
         with:
           name: Apk
           path: android/app/build/outputs/apk/release/app-release.apk
+      - name: Build Android release APK when create new tag
+        uses: kyze8439690/action-release-releaseapk@1.0.0
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
